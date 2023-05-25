@@ -1,1 +1,84 @@
-Teste
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= javascript_include_tag 'script_prazo' %>
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" %>
+
+    <title>Contador Prazos</title>
+
+</head>
+<% if user_signed_in? %> 
+ <div> Welcome <%= current_user.email %> </div> 
+  <body>
+    
+    <header>
+
+        <h2>Contador prazos</h2>
+
+    </header>
+
+    <section>
+      <%= button_to "Desconectar", destroy_user_session_path, method: :delete %>
+        <h3>Informações do Prazo</h3>
+
+        <div class="Form-group">
+
+            <p>Prazo Fatal:
+                <input type="number" name="txtprazoM" id="txtprazoM" min="1">
+
+            </p>
+
+            <p>Dias:
+                <input type="radio" name="raday" id="corridos" checked>
+                <label for="corridos">Corridos</label>
+
+                <input type="radio" name="raday" id="uteis">
+                <label for="uteis">Úteis</label>
+
+            </p>
+
+            <p>Publicação:
+                <input type="date" name="dataP" id="dataP">
+
+            </p>
+
+            <p>
+                <input 
+                type="button" 
+                value="Gerar prazo" 
+                onclick="calculateDeadline(
+                    document.getElementById('dataP').value, 
+                    document.getElementById('txtprazoM').value, 
+                    document.getElementsByName('raday')
+                )">
+
+            </p>
+
+        </div>
+
+        <div id="res">
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>&copy; Wesley Andrade</p>
+
+    </footer>
+
+    
+    
+</body>
+
+</html>
+<% else %>
+  <h3>Tela inicial</h3>
+  <%= button_to "Fazer Login", new_user_session_path %> 
+<% end %>

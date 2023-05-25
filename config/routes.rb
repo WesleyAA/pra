@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  root 'logins#index'
-
-  post '/login_user', to: 'logins#login_user'
+  devise_for :users, singular: :user, controllers: { sessions: 'sessions' }
+  root 'prazos#index'
 
   get '/prazos/index', to: 'prazos#index'
 end
