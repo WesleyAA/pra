@@ -1,10 +1,11 @@
 class SessionsController < Devise::SessionsController
-
+    
     def new
-        super
+      super
     end
-
+  
     def create
-        super
+      super
     end
-end
+  end
+  

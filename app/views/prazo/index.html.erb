@@ -1,84 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= javascript_include_tag 'script_prazo' %>
-    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" %>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= javascript_include_tag 'script_prazo' %>
+        <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" %>
 
-    <title>Contador Prazos</title>
+        <title>Contador Prazos</title>
 
-</head>
-<% if user_signed_in? %> 
- <div> Welcome <%= current_user.email %> </div> 
-  <body>
-    
-    <header>
+    </head>
 
-        <h2>Contador prazos</h2>
+    <% if user_signed_in? %> 
 
-    </header>
+    <div> 
 
-    <section>
-      <%= button_to "Desconectar", destroy_user_session_path, method: :delete %>
-        <h3>Informações do Prazo</h3>
+        Bem vindo, <%= current_user.email %>!
+        
+    </div> 
 
-        <div class="Form-group">
+    <body>
+        
+        <header>
 
-            <p>Prazo Fatal:
-                <input type="number" name="txtprazoM" id="txtprazoM" min="1">
+            <h2>Contador prazos</h2>
 
-            </p>
+        </header>
 
-            <p>Dias:
-                <input type="radio" name="raday" id="corridos" checked>
-                <label for="corridos">Corridos</label>
+        <section>
 
-                <input type="radio" name="raday" id="uteis">
-                <label for="uteis">Úteis</label>
+            <h3>
+                Informações do Prazo
+            </h3>
 
-            </p>
+            <div class="Form-group">
 
-            <p>Publicação:
-                <input type="date" name="dataP" id="dataP">
+                <p>Prazo Fatal:
 
-            </p>
+                    <input type="number" name="txtprazoM" id="txtprazoM" min="1">
 
-            <p>
-                <input 
-                type="button" 
-                value="Gerar prazo" 
-                onclick="calculateDeadline(
-                    document.getElementById('dataP').value, 
-                    document.getElementById('txtprazoM').value, 
-                    document.getElementsByName('raday')
-                )">
+                </p>
 
-            </p>
+                <p>Dias:
+
+                    <input type="radio" name="raday" id="corridos" checked>
+                    <label for="corridos">Corridos</label>
+
+                    <input type="radio" name="raday" id="uteis">
+                    <label for="uteis">Úteis</label>
+
+                </p>
+
+                <p>Publicação:
+
+                    <input type="date" name="dataP" id="dataP">
+
+                </p>
+
+                <p>
+                    <input 
+                    type="button" 
+                    value="Gerar prazo" 
+                    onclick="calculateDeadline(
+                        document.getElementById('dataP').value, 
+                        document.getElementById('txtprazoM').value, 
+                        document.getElementsByName('raday')
+                    )">
+
+                </p>
+
+            </div>
+
+            <div id="res">
+
+            </div>
+
+        </section>
+
+        <div>
+
+            <%= button_to "Desconectar", destroy_user_session_path, method: :delete %>
 
         </div>
 
-        <div id="res">
 
-        </div>
+        <footer>
 
-    </section>
+            <p>&copy; Wesley Andrade</p>
 
-    <footer>
+        </footer>
 
-        <p>&copy; Wesley Andrade</p>
-
-    </footer>
-
-    
-    
-</body>
+    </body>
 
 </html>
+
 <% else %>
-  <h3>Tela inicial</h3>
-  <%= button_to "Fazer Login", new_user_session_path %> 
+
+    <body>
+
+        <header>
+        
+            <h2>Tela inicial</h2>
+
+        </header>
+
+        <section>
+            
+            <p>
+
+                Seja bem vindo ao <strong>Contador de Prazo!<strong>
+
+            </p>
+
+            <%= button_to "Fazer Login", new_user_session_path %> 
+
+        </section>
+
+    </body>
+
 <% end %>
+
