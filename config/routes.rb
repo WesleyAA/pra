@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, singular: :user, controllers: { sessions: 'sessions' }
-  root 'prazos#index'
+  root 'deadlines#index'
 
-  get '/prazos/index', to: 'prazos#index'
+  resources :deadlines
+
 end

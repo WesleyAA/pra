@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <% if user_signed_in? %> 
+  
+    <head>
+      <%= javascript_include_tag 'rails-ujs' %>
+      <div class="navbar">
+
+        <a class="active" href="/deadlines">Prazos</a>
+        <a href="/deadlines/new">Novo Prazo</a>
+        <%= link_to "Desconectar", destroy_user_session_path, method: :delete, class: 'exit' %>
+      </div>
+
+      <h2>Prazos</h2>
+
+    </head>
+
+    <body>
+
+      
+
+      <div class='table-wrapper'>
+
+        <table class= 'fl-table'>
+
+          <thead>
+
+            <tr>
+
+              <th>Pasta</th>
+              <th>Descrição</th>
+              <th>Usuário</th>
+              <th>Publicação</th>
+              <th>Prazo final</th>
+              <th>Tipo</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <% @deadlines.each do |deadline| %>
+
+              <tr>
+
+                <td><%= deadline.briefcase_number %></td>
+                <td><%= deadline.description %></td>
+                <td><%= deadline.formatted_user_email %></td>
+                <td><%= deadline.formatted_initial_date %></td>
+                <td><%= deadline.formatted_final_date %></td>
+                <td><%= deadline.translated_deadline_type %></td>
+                <td><%= button_to 'Excluir', deadline, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %></td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div>
+      </div>
+    </body>
+    
+<% else %>
+
+  <body>
+
+    <header>
+    
+      <h2>Tela inicial</h2>
+
+    </header>
+
+    <section>
+        
+      <p>
+
+        Seja bem vindo ao <strong>Contador de Prazo!<strong>
+
+      </p>
+
+      <%= button_to "Fazer Login", new_user_session_path %> 
+
+    </section>
+
+  </body>
+
+<% end %>
+</html>

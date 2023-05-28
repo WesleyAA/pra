@@ -6,11 +6,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <%= javascript_include_tag 'script_prazo' %>
+        <%= javascript_include_tag 'deadline_script' %>
         <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" %>
-
-        <title>Contador Prazos</title>
-
+        <div class="navbar">
+            <a href="/deadlines">Prazos</a>
+            <a class="active" href="/deadlines/new">Novo Prazo</a>
+            <%= link_to "Desconectar", destroy_user_session_path, method: :delete, class: 'exit' %>
+        </div>
     </head>
 
     <% if user_signed_in? %> 
@@ -24,10 +26,10 @@
     <body>
         
         <header>
-
             <h2>Contador prazos</h2>
 
         </header>
+
 
         <section>
 
@@ -37,25 +39,37 @@
 
             <div class="Form-group">
 
+                <p>Número da Pasta:
+
+                    <input type="number" name="briefcase_number" id="briefcase_number">
+
+                </p>
+
+                <p>Descrição:
+
+                    <input type="text" name="description" id="description">
+
+                </p>
+
                 <p>Prazo Fatal:
 
-                    <input type="number" name="txtprazoM" id="txtprazoM" min="1">
+                    <input type="number" name="maximum_days" id="maximum_days" min="1">
 
                 </p>
 
                 <p>Dias:
 
-                    <input type="radio" name="raday" id="corridos" checked>
+                    <input type="radio" name="deadline_type" id="corridos" checked>
                     <label for="corridos">Corridos</label>
 
-                    <input type="radio" name="raday" id="uteis">
+                    <input type="radio" name="deadline_type" id="uteis">
                     <label for="uteis">Úteis</label>
 
                 </p>
 
-                <p>Publicação:
+                <p>Data Publicação:
 
-                    <input type="date" name="dataP" id="dataP">
+                    <input type="date" name="initial_date" id="initial_date">
 
                 </p>
 
@@ -64,12 +78,21 @@
                     type="button" 
                     value="Gerar prazo" 
                     onclick="calculateDeadline(
-                        document.getElementById('dataP').value, 
-                        document.getElementById('txtprazoM').value, 
-                        document.getElementsByName('raday')
+                        document.getElementById('initial_date').value, 
+                        document.getElementById('maximum_days').value,
+                        document.getElementsByName('deadline_type')
                     )">
 
                 </p>
+
+                <p>
+                    <input 
+                    type="button" 
+                    value="Gravar" 
+                    onclick="saveDeadline()">
+
+                </p>
+
 
             </div>
 

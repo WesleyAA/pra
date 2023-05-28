@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        blank: "não pode ficar em branco"
+    models:
+      deadline:
+        one: Prazo
+        other: Prazos
+    attributes:
+      deadline:
+        initial_date: Data de publicação
+        final_date: Prazo final
+        deadlyne_type: Tipo de prazo
+        description: Descrição
+        briefcase_number: Número da pasta
+        user_id: Usuário
