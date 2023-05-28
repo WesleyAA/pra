@@ -1,11 +1,14 @@
 class SessionsController < Devise::SessionsController
-    
-    def new
-      super
-    end
   
-    def create
-      super
-    end
+  before_action :authenticate_user!, only: :create
+
+  def new
+    super
   end
+
+  def create
+    super
+  end
+
+end
   
